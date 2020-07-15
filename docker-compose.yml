@@ -1,0 +1,45 @@
+version: '2.4'
+services:
+
+  postgres:
+    container_name: postgres
+    networks:
+      template.docker-internal:
+        aliases:
+          - postgres.template.docker-internal
+    image: "postgres:11.5"
+    volumes:
+      - "template-data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "template-db-user"
+      POSTGRES_PASSWORD: "testpassword"
+      POSTGRES_DB: "template-db"
+
+  template-app:
+    container_name: template-app
+    networks:
+      template.docker-internal:
+        aliases:
+          - template-app.template.docker-internal
+    image: "docker.pkg.github.com/chris-santa/rest-api-with-db-template/rest-api-with-db-template:latest"
+    mem_limit: '768m'
+    mem_reservation: '384m'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: "localhost:5432"
+      DB_NAME: "template-db"
+      DB_PASSWORD: "testpassword"
+      DB_MOUNT_PATH: "notUsedOnLocalhost"
+      NAIS_CLUSTER_NAME: "dev"
+      NAIS_NAMESPACE: "personbruker"
+
+volumes:
+  template-data:
+
+networks:
+  template.docker-internal:
