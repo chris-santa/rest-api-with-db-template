@@ -31,7 +31,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DB_HOST: "localhost:5432"
+      DB_HOST: "postgres.template.docker-internal:5432"
       DB_NAME: "template-db"
       DB_PASSWORD: "testpassword"
       DB_MOUNT_PATH: "notUsedOnLocalhost"
