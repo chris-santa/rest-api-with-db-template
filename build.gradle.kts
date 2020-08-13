@@ -14,6 +14,8 @@ val assertJVersion = "3.12.2"
 val kluentVersion = "1.52"
 val kafkaEmbeddedEnvVersion = "2.1.1"
 val mockkVersion = "1.9.3"
+val jacksonVersion = "2.9.9"
+
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
@@ -60,6 +62,8 @@ dependencies {
     compile("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     compile("io.ktor:ktor-server-netty:$ktorVersion")
     compile("io.ktor:ktor-html-builder:$ktorVersion")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+    compile("io.ktor:ktor-jackson:$ktorVersion")
     testCompile("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testCompile(kotlin("test-junit5"))
