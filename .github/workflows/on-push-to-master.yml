@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Sjekk om prodsetting er mulig
-        run: echo "::set-env name=SLACK_URL_SPECIFIED::$([[ -f nais/prod-sbs/default.json ]] && echo 'true' || echo 'false')"
+        run: echo "::set-env name=PROD_SBS_VARS_TEMPLATE_DEFINED::$([[ -f nais/prod-sbs/default.json ]] && echo 'true' || echo 'false')"
 
       - name: Test
-        if: env.SLACK_URL_SPECIFIED == 'true'
+        if: env.PROD_SBS_VARS_TEMPLATE_DEFINED == 'true'
         run: echo "Running deploy"
